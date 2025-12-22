@@ -896,7 +896,7 @@ int main() {
 				continue;
 			}
 
-			// Wrong: Add a6[30] = 0.
+			// WRONG: Add a6[30] = 0.
 			if (atPosi(a6, 30) != 0) {
 				cout << "Adjusting a6[30]:" << endl;
 				M[1] += atPosi(d1, 2) ? -(1 << 26) : (1 << 26);
