@@ -32,6 +32,258 @@ uint circleRight(uint x, int n) {
 	return (x >> n) | (x << (32 - n));
 }
 
+bool MD4(vector<uint>& M, vector<uint>& M_) {
+	cout << endl;
+	uint a0 = 0x67452301, b0 = 0xefcdab89, c0 = 0x98badcfe, d0 = 0x10325476;
+
+	// Stage 1
+	uint a1 = circleLeft(a0 + F(b0, c0, d0) + M[0], 3);
+	uint a1_ = circleLeft(a0 + F(b0, c0, d0) + M_[0], 3);
+	cout << "a1: " << HEX8 << a1 << " a1':" << HEX8 << a1_ << endl;
+
+	// Stage 2
+	uint d1 = circleLeft(d0 + F(a1, b0, c0) + M[1], 7);
+	uint d1_ = circleLeft(d0 + F(a1_, b0, c0) + M_[1], 7);
+	cout << "d1: " << HEX8 << d1 << " d1':" << HEX8 << d1_ << endl;
+
+	// Stage 3
+	uint c1 = circleLeft(c0 + F(d1, a1, b0) + M[2], 11);
+	uint c1_ = circleLeft(c0 + F(d1_, a1_, b0) + M_[2], 11);
+	cout << "c1: " << HEX8 << c1 << " c1':" << HEX8 << c1_ << endl;
+
+	// Stage 4
+	uint b1 = circleLeft(b0 + F(c1, d1, a1) + M[3], 19);
+	uint b1_ = circleLeft(b0 + F(c1_, d1_, a1_) + M_[3], 19);
+	cout << "b1: " << HEX8 << b1 << " b1':" << HEX8 << b1_ << endl;
+
+	// Stage 5
+	uint a2 = circleLeft(a1 + F(b1, c1, d1) + M[4], 3);
+	uint a2_ = circleLeft(a1_ + F(b1_, c1_, d1_) + M_[4], 3);
+	cout << "a2: " << HEX8 << a2 << " a2':" << HEX8 << a2_ << endl;
+
+	// Stage 6
+	uint d2 = circleLeft(d1 + F(a2, b1, c1) + M[5], 7);
+	uint d2_ = circleLeft(d1_ + F(a2_, b1_, c1_) + M_[5], 7);
+	cout << "d2: " << HEX8 << d2 << " d2':" << HEX8 << d2_ << endl;
+
+	// Stage 7
+	uint c2 = circleLeft(c1 + F(d2, a2, b1) + M[6], 11);
+	uint c2_ = circleLeft(c1_ + F(d2_, a2_, b1_) + M_[6], 11);
+	cout << "c2: " << HEX8 << c2 << " c2':" << HEX8 << c2_ << endl;
+
+	// Stage 8
+	uint b2 = circleLeft(b1 + F(c2, d2, a2) + M[7], 19);
+	uint b2_ = circleLeft(b1_ + F(c2_, d2_, a2_) + M_[7], 19);
+	cout << "b2: " << HEX8 << b2 << " b2':" << HEX8 << b2_ << endl;
+
+	// Stage 9
+	uint a3 = circleLeft(a2 + F(b2, c2, d2) + M[8], 3);
+	uint a3_ = circleLeft(a2_ + F(b2_, c2_, d2_) + M_[8], 3);
+	cout << "a3: " << HEX8 << a3 << " a3':" << HEX8 << a3_ << endl;
+
+	// Stage 10
+	uint d3 = circleLeft(d2 + F(a3, b2, c2) + M[9], 7);
+	uint d3_ = circleLeft(d2_ + F(a3_, b2_, c2_) + M_[9], 7);
+	cout << "d3: " << HEX8 << d3 << " d3':" << HEX8 << d3_ << endl;
+
+	// Stage 11
+	uint c3 = circleLeft(c2 + F(d3, a3, b2) + M[10], 11);
+	uint c3_ = circleLeft(c2_ + F(d3_, a3_, b2_) + M_[10], 11);
+	cout << "c3: " << HEX8 << c3 << " c3':" << HEX8 << c3_ << endl;
+
+	// Stage 12
+	uint b3 = circleLeft(b2 + F(c3, d3, a3) + M[11], 19);
+	uint b3_ = circleLeft(b2_ + F(c3_, d3_, a3_) + M_[11], 19);
+	cout << "b3: " << HEX8 << b3 << " b3':" << HEX8 << b3_ << endl;
+
+	// Stage 13
+	uint a4 = circleLeft(a3 + F(b3, c3, d3) + M[12], 3);
+	uint a4_ = circleLeft(a3_ + F(b3_, c3_, d3_) + M_[12], 3);
+	cout << "a4: " << HEX8 << a4 << " a4':" << HEX8 << a4_ << endl;
+
+	// Stage 14
+	uint d4 = circleLeft(d3 + F(a4, b3, c3) + M[13], 7);
+	uint d4_ = circleLeft(d3_ + F(a4_, b3_, c3_) + M_[13], 7);
+	cout << "d4: " << HEX8 << d4 << " d4':" << HEX8 << d4_ << endl;
+
+	// Stage 15
+	uint c4 = circleLeft(c3 + F(d4, a4, b3) + M[14], 11);
+	uint c4_ = circleLeft(c3_ + F(d4_, a4_, b3_) + M_[14], 11);
+	cout << "c4: " << HEX8 << c4 << " c4':" << HEX8 << c4_ << endl;
+
+	// Stage 16
+	uint b4 = circleLeft(b3 + F(c4, d4, a4) + M[15], 19);
+	uint b4_ = circleLeft(b3_ + F(c4_, d4_, a4_) + M_[15], 19);
+	cout << "b4: " << HEX8 << b4 << " b4':" << HEX8 << b4_ << endl;
+
+	// Stage 17
+	uint a5 = circleLeft(a4 + G(b4, c4, d4) + M[0] + 0x5A827999, 3);
+	uint a5_ = circleLeft(a4_ + G(b4_, c4_, d4_) + M_[0] + 0x5A827999, 3);
+	cout << "a5: " << HEX8 << a5 << " a5':" << HEX8 << a5_ << endl;
+
+	// Stage 18
+	uint d5 = circleLeft(d4 + G(a5, b4, c4) + M[4] + 0x5A827999, 5);
+	uint d5_ = circleLeft(d4_ + G(a5_, b4_, c4_) + M_[4] + 0x5A827999, 5);
+	cout << "d5: " << HEX8 << d5 << " d5':" << HEX8 << d5_ << endl;
+
+	// Stage 19
+	uint c5 = circleLeft(c4 + G(d5, a5, b4) + M[8] + 0x5A827999, 9);
+	uint c5_ = circleLeft(c4_ + G(d5_, a5_, b4_) + M_[8] + 0x5A827999, 9);
+	cout << "c5: " << HEX8 << c5 << " c5':" << HEX8 << c5_ << endl;
+
+	// Stage 20
+	uint b5 = circleLeft(b4 + G(c5, d5, a5) + M[12] + 0x5A827999, 13);
+	uint b5_ = circleLeft(b4_ + G(c5_, d5_, a5_) + M_[12] + 0x5A827999, 13);
+	cout << "b5: " << HEX8 << b5 << " b5':" << HEX8 << b5_ << endl;
+
+	// Stage 21
+	uint a6 = circleLeft(a5 + G(b5, c5, d5) + M[1] + 0x5A827999, 3);
+	uint a6_ = circleLeft(a5_ + G(b5_, c5_, d5_) + M_[1] + 0x5A827999, 3);
+	cout << "a6: " << HEX8 << a6 << " a6':" << HEX8 << a6_ << endl;
+
+	// Stage 22
+	uint d6 = circleLeft(d5 + G(a6, b5, c5) + M[5] + 0x5A827999, 5);
+	uint d6_ = circleLeft(d5_ + G(a6_, b5_, c5_) + M_[5] + 0x5A827999, 5);
+	cout << "d6: " << HEX8 << d6 << " d6':" << HEX8 << d6_ << endl;
+
+	// Stage 23
+	uint c6 = circleLeft(c5 + G(d6, a6, b5) + M[9] + 0x5A827999, 9);
+	uint c6_ = circleLeft(c5_ + G(d6_, a6_, b5_) + M_[9] + 0x5A827999, 9);
+	cout << "c6: " << HEX8 << c6 << " c6':" << HEX8 << c6_ << endl;
+
+	// Stage 24
+	uint b6 = circleLeft(b5 + G(c6, d6, a6) + M[13] + 0x5A827999, 13);
+	uint b6_ = circleLeft(b5_ + G(c6_, d6_, a6_) + M_[13] + 0x5A827999, 13);
+	cout << "b6: " << HEX8 << b6 << " b6':" << HEX8 << b6_ << endl;
+
+	// Stage 25
+	uint a7 = circleLeft(a6 + G(b6, c6, d6) + M[2] + 0x5A827999, 3);
+	uint a7_ = circleLeft(a6_ + G(b6_, c6_, d6_) + M_[2] + 0x5A827999, 3);
+	cout << "a7: " << HEX8 << a7 << " a7':" << HEX8 << a7_ << endl;
+
+	// Stage 26
+	uint d7 = circleLeft(d6 + G(a7, b6, c6) + M[6] + 0x5A827999, 5);
+	uint d7_ = circleLeft(d6_ + G(a7_, b6_, c6_) + M_[6] + 0x5A827999, 5);
+	cout << "d7: " << HEX8 << d7 << " d7':" << HEX8 << d7_ << endl;
+
+	// Stage 27
+	uint c7 = circleLeft(c6 + G(d7, a7, b6) + M[10] + 0x5A827999, 9);
+	uint c7_ = circleLeft(c6_ + G(d7_, a7_, b6_) + M_[10] + 0x5A827999, 9);
+	cout << "c7: " << HEX8 << c7 << " c7':" << HEX8 << c7_ << endl;
+
+	// Stage 28
+	uint b7 = circleLeft(b6 + G(c7, d7, a7) + M[14] + 0x5A827999, 13);
+	uint b7_ = circleLeft(b6_ + G(c7_, d7_, a7_) + M_[14] + 0x5A827999, 13);
+	cout << "b7: " << HEX8 << b7 << " b7':" << HEX8 << b7_ << endl;
+
+	// Stage 29
+	uint a8 = circleLeft(a7 + G(b7, c7, d7) + M[3] + 0x5A827999, 3);
+	uint a8_ = circleLeft(a7_ + G(b7_, c7_, d7_) + M_[3] + 0x5A827999, 3);
+	cout << "a8: " << HEX8 << a8 << " a8':" << HEX8 << a8_ << endl;
+
+	// Stage 30
+	uint d8 = circleLeft(d7 + G(a8, b7, c7) + M[7] + 0x5A827999, 5);
+	uint d8_ = circleLeft(d7_ + G(a8_, b7_, c7_) + M_[7] + 0x5A827999, 5);
+	cout << "d8: " << HEX8 << d8 << " d8':" << HEX8 << d8_ << endl;
+
+	// Stage 31
+	uint c8 = circleLeft(c7 + G(d8, a8, b7) + M[11] + 0x5A827999, 9);
+	uint c8_ = circleLeft(c7_ + G(d8_, a8_, b7_) + M_[11] + 0x5A827999, 9);
+	cout << "c8: " << HEX8 << c8 << " c8':" << HEX8 << c8_ << endl;
+
+	// Stage 32
+	uint b8 = circleLeft(b7 + G(c8, d8, a8) + M[15] + 0x5A827999, 13);
+	uint b8_ = circleLeft(b7_ + G(c8_, d8_, a8_) + M_[15] + 0x5A827999, 13);
+	cout << "b8: " << HEX8 << b8 << " b8':" << HEX8 << b8_ << endl;
+
+	// Stage 33
+	uint a9 = circleLeft(a8 + H(b8, c8, d8) + M[0] + 0x6ED9EBA1, 3);
+	uint a9_ = circleLeft(a8_ + H(b8_, c8_, d8_) + M_[0] + 0x6ED9EBA1, 3);
+	cout << "a9: " << HEX8 << a9 << " a9':" << HEX8 << a9_ << endl;
+
+	// Stage 34
+	uint d9 = circleLeft(d8 + H(a9, b8, c8) + M[8] + 0x6ED9EBA1, 9);
+	uint d9_ = circleLeft(d8_ + H(a9_, b8_, c8_) + M_[8] + 0x6ED9EBA1, 9);
+	cout << "d9: " << HEX8 << d9 << " d9':" << HEX8 << d9_ << endl;
+
+	// Stage 35
+	uint c9 = circleLeft(c8 + H(d9, a9, b8) + M[4] + 0x6ED9EBA1, 11);
+	uint c9_ = circleLeft(c8_ + H(d9_, a9_, b8_) + M_[4] + 0x6ED9EBA1, 11);
+	cout << "c9: " << HEX8 << c9 << " c9':" << HEX8 << c9_ << endl;
+
+	// Stage 36
+	uint b9 = circleLeft(b8 + H(c9, d9, a9) + M[12] + 0x6ED9EBA1, 15);
+	uint b9_ = circleLeft(b8_ + H(c9_, d9_, a9_) + M_[12] + 0x6ED9EBA1, 15);
+	cout << "b9: " << HEX8 << b9 << " b9':" << HEX8 << b9_ << endl;
+
+	// Stage 37
+	uint a10 = circleLeft(a9 + H(b9, c9, d9) + M[2] + 0x6ED9EBA1, 3);
+	uint a10_ = circleLeft(a9_ + H(b9_, c9_, d9_) + M_[2] + 0x6ED9EBA1, 3);
+	cout << "a10: " << HEX8 << a10 << " a10':" << HEX8 << a10_ << endl;
+
+	// Stage 38
+	uint d10 = circleLeft(d9 + H(a10, b9, c9) + M[10] + 0x6ED9EBA1, 9);
+	uint d10_ = circleLeft(d9_ + H(a10_, b9_, c9_) + M_[10] + 0x6ED9EBA1, 9);
+	cout << "d10: " << HEX8 << d10 << " d10':" << HEX8 << d10_ << endl;
+
+	// Stage 39
+	uint c10 = circleLeft(c9 + H(d10, a10, b9) + M[6] + 0x6ED9EBA1, 11);
+	uint c10_ = circleLeft(c9_ + H(d10_, a10_, b9_) + M_[6] + 0x6ED9EBA1, 11);
+	cout << "c10: " << HEX8 << c10 << " c10':" << HEX8 << c10_ << endl;
+
+	// Stage 40
+	uint b10 = circleLeft(b9 + H(c10, d10, a10) + M[14] + 0x6ED9EBA1, 15);
+	uint b10_ = circleLeft(b9_ + H(c10_, d10_, a10_) + M_[14] + 0x6ED9EBA1, 15);
+	cout << "b10: " << HEX8 << b10 << " b10':" << HEX8 << b10_ << endl;
+
+	// Stage 41
+	uint a11 = circleLeft(a10 + H(b10, c10, d10) + M[1] + 0x6ED9EBA1, 3);
+	uint a11_ = circleLeft(a10_ + H(b10_, c10_, d10_) + M_[1] + 0x6ED9EBA1, 3);
+	cout << "a11: " << HEX8 << a11 << " a11':" << HEX8 << a11_ << endl;
+
+	// Stage 42
+	uint d11 = circleLeft(d10 + H(a11, b10, c10) + M[9] + 0x6ED9EBA1, 9);
+	uint d11_ = circleLeft(d10_ + H(a11_, b10_, c10_) + M_[9] + 0x6ED9EBA1, 9);
+	cout << "d11: " << HEX8 << d11 << " d11':" << HEX8 << d11_ << endl;
+
+	// Stage 43
+	uint c11 = circleLeft(c10 + H(d11, a11, b10) + M[5] + 0x6ED9EBA1, 11);
+	uint c11_ = circleLeft(c10_ + H(d11_, a11_, b10_) + M_[5] + 0x6ED9EBA1, 11);
+	cout << "c11: " << HEX8 << c11 << " c11':" << HEX8 << c11_ << endl;
+
+	// Stage 44
+	uint b11 = circleLeft(b10 + H(c11, d11, a11) + M[13] + 0x6ED9EBA1, 15);
+	uint b11_ = circleLeft(b10_ + H(c11_, d11_, a11_) + M_[13] + 0x6ED9EBA1, 15);
+	cout << "b11: " << HEX8 << b11 << " b11':" << HEX8 << b11_ << endl;
+
+	// Stage 45
+	cout << endl;
+	uint a12 = circleLeft(a11 + H(b11, c11, d11) + M[3] + 0x6ED9EBA1, 3);
+	uint a12_ = circleLeft(a11_ + H(b11_, c11_, d11_) + M_[3] + 0x6ED9EBA1, 3);
+	bool a_eq = (a12 == a12_);
+	cout << "a12:" << HEX8 << a12 << " a12':" << HEX8 << a12_ << endl;
+
+	// Stage 46
+	uint d12 = circleLeft(d11 + H(a12, b11, c11) + M[11] + 0x6ED9EBA1, 9);
+	uint d12_ = circleLeft(d11_ + H(a12_, b11_, c11_) + M_[11] + 0x6ED9EBA1, 9);
+	bool b_eq = (d12 == d12_);
+	cout << "d12:" << HEX8 << d12 << " d12':" << HEX8 << d12_ << endl;
+
+	// Stage 47
+	uint c12 = circleLeft(c11 + H(d12, a12, b11) + M[7] + 0x6ED9EBA1, 11);
+	uint c12_ = circleLeft(c11_ + H(d12_, a12_, b11_) + M_[7] + 0x6ED9EBA1, 11);
+	bool c_eq = (c12 == c12_);
+	cout << "c12:" << HEX8 << c12 << " c12':" << HEX8 << c12_ << endl;
+
+	// Stage 48
+	uint b12 = circleLeft(b11 + H(c12, d12, a12) + M[15] + 0x6ED9EBA1, 15);
+	uint b12_ = circleLeft(b11_ + H(c12_, d12_, a12_) + M_[15] + 0x6ED9EBA1, 15);
+	bool d_eq = (b12 == b12_);
+	cout << "b12:" << HEX8 << b12 << " b12':" << HEX8 << b12_ << endl;
+
+	return a_eq && b_eq && c_eq && d_eq;
+}
+
 int main() {
 	vector<uint> M(16), M_(16);
 	random_device seed;
@@ -39,8 +291,10 @@ int main() {
 	uniform_int_distribution<uint> distrib(0, 0xFFFFFFFF);
 
 	uint a0 = 0x67452301, b0 = 0xefcdab89, c0 = 0x98badcfe, d0 = 0x10325476;
+	int cnt = 0;
 
 	while (true) {
+		cnt++;
 		for (auto& word : M) {
 			word = distrib(engine);
 		}
@@ -224,6 +478,7 @@ int main() {
 		uint a5, a5_;
 		while (true) {
 			a5 = circleLeft(a4 + G(b4, c4, d4) + M[0] + 0x5A827999, 3);
+			M_[0] = M[0];
 			a5_ = circleLeft(a4_ + G(b4_, c4_, d4_) + M_[0] + 0x5A827999, 3);
 			cout << "\nM0:" << HEX8 << M[0] << " M0':" << HEX8 << M_[0] << " a5:" << HEX8 << a5 << " a5':" << HEX8 << a5_ << endl;
 
@@ -1218,65 +1473,16 @@ int main() {
 			continue;
 		}
 
-		// Stage 38
-		uint d10 = circleLeft(d9 + H(a10, b9, c9) + M[10] + 0x6ED9EBA1, 9);
-		uint d10_ = circleLeft(d9_ + H(a10_, b9_, c9_) + M_[10] + 0x6ED9EBA1, 9);
-		cout << "d10:" << HEX8 << d10 << " d10':" << HEX8 << d10_ << endl;
-
-		// Stage 39
-		uint c10 = circleLeft(c9 + H(d10, a10, b9) + M[6] + 0x6ED9EBA1, 11);
-		uint c10_ = circleLeft(c9_ + H(d10_, a10_, b9_) + M_[6] + 0x6ED9EBA1, 11);
-		cout << "c10:" << HEX8 << c10 << " c10':" << HEX8 << c10_ << endl;
-
-		// Stage 40
-		uint b10 = circleLeft(b9 + H(c10, d10, a10) + M[14] + 0x6ED9EBA1, 15);
-		uint b10_ = circleLeft(b9_ + H(c10_, d10_, a10_) + M_[14] + 0x6ED9EBA1, 15);
-		cout << "b10:" << HEX8 << b10 << " b10':" << HEX8 << b10_ << endl;
-
-		// Stage 41
-		uint a11 = circleLeft(a10 + H(b10, c10, d10) + M[1] + 0x6ED9EBA1, 3);
-		uint a11_ = circleLeft(a10_ + H(b10_, c10_, d10_) + M_[1] + 0x6ED9EBA1, 3);
-		cout << "a11:" << HEX8 << a11 << " a11':" << HEX8 << a11_ << endl;
-
-		// Stage 42
-		uint d11 = circleLeft(d10 + H(a11, b10, c10) + M[9] + 0x6ED9EBA1, 9);
-		uint d11_ = circleLeft(d10_ + H(a11_, b10_, c10_) + M_[9] + 0x6ED9EBA1, 9);
-		cout << "d11:" << HEX8 << d11 << " d11':" << HEX8 << d11_ << endl;
-
-		// Stage 43
-		uint c11 = circleLeft(c10 + H(d11, a11, b10) + M[5] + 0x6ED9EBA1, 11);
-		uint c11_ = circleLeft(c10_ + H(d11_, a11_, b10_) + M_[5] + 0x6ED9EBA1, 11);
-		cout << "c11:" << HEX8 << c11 << " c11':" << HEX8 << c11_ << endl;
-
-		// Stage 44
-		uint b11 = circleLeft(b10 + H(c11, d11, a11) + M[13] + 0x6ED9EBA1, 15);
-		uint b11_ = circleLeft(b10_ + H(c11_, d11_, a11_) + M_[13] + 0x6ED9EBA1, 15);
-		cout << "b11:" << HEX8 << b11 << " b11':" << HEX8 << b11_ << endl;
-
-		// Stage 45
-		uint a12 = circleLeft(a11 + H(b11, c11, d11) + M[3] + 0x6ED9EBA1, 3);
-		uint a12_ = circleLeft(a11_ + H(b11_, c11_, d11_) + M_[3] + 0x6ED9EBA1, 3);
-		cout << "a12:" << HEX8 << a12 << " a12':" << HEX8 << a12_ << endl;
-
-		// Stage 46
-		uint d12 = circleLeft(d11 + H(a12, b11, c11) + M[11] + 0x6ED9EBA1, 9);
-		uint d12_ = circleLeft(d11_ + H(a12_, b11_, c11_) + M_[11] + 0x6ED9EBA1, 9);
-		cout << "d12:" << HEX8 << d12 << " d12':" << HEX8 << d12_ << endl;
-
-		// Stage 47
-		uint c12 = circleLeft(c11 + H(d12, a12, b11) + M[7] + 0x6ED9EBA1, 11);
-		uint c12_ = circleLeft(c11_ + H(d12_, a12_, b11_) + M_[7] + 0x6ED9EBA1, 11);
-		cout << "c12:" << HEX8 << c12 << " c12':" << HEX8 << c12_ << endl;
-
-		// Stage 48
-		uint b12 = circleLeft(b11 + H(c12, d12, a12) + M[15] + 0x6ED9EBA1, 15);
-		uint b12_ = circleLeft(b11_ + H(c12_, d12_, a12_) + M_[15] + 0x6ED9EBA1, 15);
-		cout << "b12:" << HEX8 << b12 << " b12':" << HEX8 << b12_ << endl;
+		if (!MD4(M, M_)) {
+			cout << "Failed on final MD4 check.\n" << endl;
+			continue;
+		}
 
 		break;
 	}
 
-	cout << "\nFound a collision!" << endl;
+	cout << "\nRound: " << dec << cnt << endl;
+	cout << "Found a collision!" << endl;
 	cout << "M:" << endl;
 	for (int i = 15; i >= 8; i--) {
 		cout << HEX8 << M[i] << " ";
